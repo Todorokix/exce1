@@ -22,7 +22,7 @@ $mnk = getName($n);
 $rd = rand(0,999);
 $vvv = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240/".$mnk."";
 
-$ipp = "103.211.8.201";
+$ipp = "223.28.43.233";
 
 function ofer($url, $method, $data = null) {
 	global $ipp, $vvv;
