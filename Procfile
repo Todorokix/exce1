@@ -1,1 +1,1 @@
-worker: php new.php
+worker: php index.php
