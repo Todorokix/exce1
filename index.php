@@ -1,5 +1,10 @@
 <?php
 error_reporting(0);
+echo " HAPPY LOOTING!! \n";
+unlink('cookie.txt');
+
+
+
 $n=4;
 
 function getName($n) {
@@ -95,7 +100,6 @@ function curl_request($url, $method, $data = null) {
         "content-type: application/x-www-form-urlencoded",
         "X-Requested-With: XMLHttpRequest",
         "X-Forwarded-For: 202.145.6.155",
-        "cookie: bitmedia_fid=eyJmaWQiOiJlMmUzMDQxZGZiYjM1ZWRiNDY5NTkyODdiMGY1ZWM5MiIsImZpZG5vdWEiOiJlNmFhYmMxMzZmZGI0YzQwMzM0NGM3M2M5ZTQ2YTM0ZSJ9; _ga=GA1.1.1473213038.1715662491; ci_session=ike51vruf3gafvck36nauel6qphg2glu; csrf_cookie_name=4f895001514d79585eb4fa7a47354b64; _ga_5RXM6JMJCV=GS1.1.1715662490.1.1.1715662969.0.0.0",
         "user-agent: Mozilla/5.0 (Linux; Android 11; V2043) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36",
     );
     $ch = curl_init();
@@ -105,7 +109,9 @@ function curl_request($url, $method, $data = null) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_COOKIE,TRUE);     
+    curl_setopt($ch, CURLOPT_COOKIE, "");
+    curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
+    curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
     if ($method === 'POST') {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -114,6 +120,15 @@ function curl_request($url, $method, $data = null) {
     curl_close($ch);
     return $result;
 }
+ss:
+$url = "https://hatecoin.me/login";
+$res = curl_request($url, 'GET');
+$cf = explode('">' ,explode('<input type="hidden" name="csrf_token_name" value="', $res)[1])[0];
+$cap = solveCaptcha();
+$url = 'https://hatecoin.me/auth/login';
+$data = "csrf_token_name=".$cf."&email=nisafcshxjx%40gmail.com&password=Nung1234&captcha=hcaptcha&g-recaptcha-response=&h-captcha-response=".$cap."";
+$response = curl_request($url, 'POST', $data);
+
 
 while(true):
 $url = "https://hatecoin.me/faucet/";
@@ -121,7 +136,7 @@ $r = curl_request($url, 'GET');
 
 $tim = explode(' - 1' ,explode('var wait = ', $r)[1])[0];
 $lef = explode('</p>' ,explode('<p class="lh-1 mb-1 font-weight-bold">', $r)[3])[0];
-
+if($lef==""){echo " login ulang! ";goto ss;}
 
 $csf = explode('">' ,explode('<input type="hidden" name="csrf_token_name" id="token" value="', $r)[1])[0];
 $tok = explode('">' ,explode('<input type="hidden" name="token" value="', $r)[1])[0];
@@ -185,5 +200,6 @@ $wak = date("[H:i]", $timestamp);
 echo " ".$wak." ".$suc." \n";
 if (strpos($suc, "added") !== false) {sleep(361);}
 if($lef=="1/120"){echo "Complete!!! \n";}
+
 endwhile;
 
