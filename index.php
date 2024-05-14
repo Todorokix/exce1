@@ -94,15 +94,18 @@ function curl($url, $method, $data = null) {
     return $result;
 }
 function curl_request($url, $method, $data = null) {
+	global $vvv;
     $header = array(
         "Host: hatecoin.me",
         "upgrade-insecure-requests: 1",
         "content-type: application/x-www-form-urlencoded",
         "X-Requested-With: XMLHttpRequest",
         "X-Forwarded-For: 61.247.3.226",
-        "user-agent: Mozilla/5.0 (Linux; Android 11; V2043) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36",
+        "User-Agent: ".$vvv.""
     );
+    
     $ch = curl_init();
+    
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -137,7 +140,7 @@ $r = curl_request($url, 'GET');
 
 $tim = explode(' - 1' ,explode('var wait = ', $r)[1])[0];
 $lef = explode('</p>' ,explode('<p class="lh-1 mb-1 font-weight-bold">', $r)[3])[0];
-if($lef==""){echo " login ulang! ";goto ss;}
+if($lef==""){echo " login ulang! \n";goto ss;}
 
 $csf = explode('">' ,explode('<input type="hidden" name="csrf_token_name" id="token" value="', $r)[1])[0];
 $tok = explode('">' ,explode('<input type="hidden" name="token" value="', $r)[1])[0];
