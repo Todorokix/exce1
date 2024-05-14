@@ -99,7 +99,7 @@ function curl_request($url, $method, $data = null) {
         "upgrade-insecure-requests: 1",
         "content-type: application/x-www-form-urlencoded",
         "X-Requested-With: XMLHttpRequest",
-        "X-Forwarded-For: 202.145.6.155",
+        "X-Forwarded-For: 61.247.3.226",
         "user-agent: Mozilla/5.0 (Linux; Android 11; V2043) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36",
     );
     $ch = curl_init();
@@ -123,12 +123,13 @@ function curl_request($url, $method, $data = null) {
 ss:
 $url = "https://hatecoin.me/login";
 $res = curl_request($url, 'GET');
+
 $cf = explode('">' ,explode('<input type="hidden" name="csrf_token_name" value="', $res)[1])[0];
 $cap = solveCaptcha();
 $url = 'https://hatecoin.me/auth/login';
 $data = "csrf_token_name=".$cf."&email=nisafcshxjx%40gmail.com&password=Nung1234&captcha=hcaptcha&g-recaptcha-response=&h-captcha-response=".$cap."";
 $response = curl_request($url, 'POST', $data);
-
+//echo $response; exit;
 
 while(true):
 $url = "https://hatecoin.me/faucet/";
