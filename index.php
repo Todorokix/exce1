@@ -100,7 +100,7 @@ function curl_request($url, $method, $data = null) {
         "upgrade-insecure-requests: 1",
         "content-type: application/x-www-form-urlencoded",
         "X-Requested-With: XMLHttpRequest",
-        "X-Forwarded-For: 61.247.3.226",
+        "X-Forwarded-For: 103.56.7.1",
         "User-Agent: ".$vvv.""
     );
     
