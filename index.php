@@ -1,11 +1,5 @@
 <?php
 error_reporting(0);
-echo " HAPPY LOOTING!! \n";
-
-$ar= array("1279");
-
-
-
 $n=4;
 
 function getName($n) {
@@ -25,72 +19,11 @@ $mnk = getName($n);
 $rd = rand(0,999);
 $vvv = "Mozilla/5.0 (Linux; Android 2.3.6) AppleWebKit/533.1 (KHTML, like Gecko) edge X/".$mnk."";
 
-$xc = rand(1,100);
-$ipp = "124.106.9.".$xc."";
-
-function ofer($url, $method, $data = null) {
-	global $ipp, $vvv;
-    $header = array(
-        "Host: excentiv.com",
-        "content-type: application/x-www-form-urlencoded",
-        "X-Forwarded-For: ".$ipp."",
-        "user-agent: ".$vvv.""
-    );
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_COOKIE, "");
-    curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
-    curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
-    if ($method === 'POST') {
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    }
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-
-function batt($url, $method, $data = null) {
-	global $ipp, $vvv;
-    $header = array(
-        "Host: coins-battle.com",
-        "upgrade-insecure-requests: 1",
-        "content-type: application/x-www-form-urlencoded",
-        "X-Requested-With: XMLHttpRequest",
-        "X-Forwarded-For: ".$ipp."",
-        "user-agent: ".$vvv.""
-    );
-    //$proxy = 'http://jmdzpqpq:imrbe2ogb5md@2.56.119.93:5074';
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_COOKIE, "");
-    curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
-    curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
-    if ($method === 'POST') {
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    }
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-
-
 function solveCaptcha(){
 	global $vvv;
 a:
-$sit = "6LdQN2wkAAAAAJcsc6u8xgog6ObX0icCRAowGiW8";
-$login = "http://sctg.xyz/in.php?key=Gjd5MbFADqP0DlrurYrAmdIlQ9owqctV|onlyxevil&method=userrecaptcha&googlekey=".$sit."&json=1&pageurl=https://coins-battle.com/game/claimreward";
+$sit = "c198aabb-6f02-486e-acbd-0663ccb32b93";
+$login = "http://sctg.xyz/in.php?key=Gjd5MbFADqP0DlrurYrAmdIlQ9owqctV|onlyxevil&method=hcaptcha&sitekey=".$sit."&json=1&pageurl=https://hatecoin.me/faucet/verify";
 $ua[] = "User-Agent: ".$vvv."";
 $ua[] = "Content-Type: application/json";
 $ch = curl_init();
@@ -127,75 +60,130 @@ $captcha = str_replace("OK|", "", $res);
 curl_close($ch);
 return $captcha;
 }
-function token(){
-	global $use;
-$url = "https://excentiv.com/offerwall/?userid=".$use."&key=fXxIRKDC2bEyjPnzG8Jd";
-//$url = "https://excentiv.com/offerwall?userid=4b4b6bf41acc&key=5eaQHDSVYcwbdACp6ZB7";
-$of = ofer($url, 'GET');
 
-sleep(5);
-//if (strpos($of, "Games") === false) {echo" Game Hilang \n";sleep(99999);}
-$tokk = explode('"',explode('<button value="https://coins-battle.com?token=', $of)[1])[0];
-if($tokk==""){echo" Game Hilang \n";sleep(999995);}
-return $tokk;
+function curl($url, $method, $data = null) {
+	global $vvv;
+    $header = array(        
+        "Content-Type: application/json",
+        "User-Agent: ".$vvv.""
+    );
+    $proxy = 'socks5://lgekvzsx:cn78dlxqoz27@185.199.229.156:7492';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_COOKIE, "");
+    curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+    curl_setopt($ch, CURLOPT_PROXY, $proxy);       
+    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+    if ($method === 'POST') {
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    }
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
 }
-
-
-$bb = 0;
-
-xx:
-
-
-//$ar= array("4b4b6bf41acc","2957ded8262f","e5cfd39424ff","27b2485eed06","c98283105579");
-
-$use = $ar[$bb];
-echo "userid = ".$use." \n";
-if($use == ""){echo "Complete!!! \n";unlink('cookie.txt');sleep(99999);}
-unlink('cookie.txt');
-
-$rot = token();
-
-$url = "https://coins-battle.com/?token=".$rot."";
-$bat = batt($url, 'GET');
-
-$ui = rand(1,12);
-
-zz:
+function curl_request($url, $method, $data = null) {
+    $header = array(
+        "Host: hatecoin.me",
+        "upgrade-insecure-requests: 1",
+        "content-type: application/x-www-form-urlencoded",
+        "X-Requested-With: XMLHttpRequest",
+        "X-Forwarded-For: 202.145.6.155",
+        "cookie: bitmedia_fid=eyJmaWQiOiJlMmUzMDQxZGZiYjM1ZWRiNDY5NTkyODdiMGY1ZWM5MiIsImZpZG5vdWEiOiJlNmFhYmMxMzZmZGI0YzQwMzM0NGM3M2M5ZTQ2YTM0ZSJ9; _ga=GA1.1.1473213038.1715662491; ci_session=ike51vruf3gafvck36nauel6qphg2glu; csrf_cookie_name=4f895001514d79585eb4fa7a47354b64; _ga_5RXM6JMJCV=GS1.1.1715662490.1.1.1715662969.0.0.0",
+        "user-agent: Mozilla/5.0 (Linux; Android 11; V2043) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36",
+    );
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_COOKIE,TRUE);     
+    if ($method === 'POST') {
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    }
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
 
 while(true):
-$url = "https://coins-battle.com/game/play/".$ui."";
-$btc = batt($url, 'GET');
-$con = explode(' </b>&nbsp;',explode('<b class="gradient-text">Website: ', $btc)[1])[0];
-if($con == ""){$bb=$bb;goto xx;}
-if(isset($con)) {
-    $dx="ON";
-}
-//$sit = explode('"',explode('<div class="g-recaptcha" data-sitekey="', $btc)[1])[0];
-$idd = explode('">',explode('<input type="hidden" name="game_id" value="', $btc)[1])[0];
-$csf = explode('">',explode('<input type="hidden" name="csrf_token" value="', $btc)[1])[0];
-$tim = explode("';",explode("let ctimer = '", $btc)[1])[0];
-$lef = explode(' today',explode('<p><b>You have already play ', $btc)[1])[0];
-if($lef=="70/70"){$bb=$bb+1;goto xx;}
+$url = "https://hatecoin.me/faucet/";
+$r = curl_request($url, 'GET');
+
+$tim = explode(' - 1' ,explode('var wait = ', $r)[1])[0];
+$lef = explode('</p>' ,explode('<p class="lh-1 mb-1 font-weight-bold">', $r)[3])[0];
+
+
+$csf = explode('">' ,explode('<input type="hidden" name="csrf_token_name" id="token" value="', $r)[1])[0];
+$tok = explode('">' ,explode('<input type="hidden" name="token" value="', $r)[1])[0];
+
+
+
+$bot1=explode('\"',explode('rel=\"',$r)[1])[0];
+    $bot2=explode('\"',explode('rel=\"',$r)[2])[0];
+    $bot3=explode('\"',explode('rel=\"',$r)[3])[0];
+    $main = explode('"',explode('data:image/png;base64,', $r)[1])[0];
+    $img1 = explode('"',explode('data:image/png;base64,', $r)[2])[0];
+    $img2 = explode('"',explode('data:image/png;base64,', $r)[3])[0];
+    $img3 = explode('"',explode('data:image/png;base64,', $r)[4])[0];
+
+$url = "http://sctg.xyz/in.php";
+$data = array(
+        'key' => 'Gjd5MbFADqP0DlrurYrAmdIlQ9owqctV',
+        'method' => 'antibot',
+        'main' => $main,
+        $bot1 => $img1,
+        $bot2 => $img2,
+        $bot3 => $img3
+        );
+$options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+$context = stream_context_create($options);
+$response = file_get_contents($url, false, $context);
+$task = explode('OK|', $response)[1];
+
+c:
+$url = "http://sctg.xyz/res.php?key=Gjd5MbFADqP0DlrurYrAmdIlQ9owqctV&id=".$task."";
+$res = curl($url, 'GET');
+
+if ($res == 'CAPCHA_NOT_READY') {          
+        sleep(6);
+        goto c;
+    }
+    	$hasil = explode('OK|', $res)[1];
+       $antb = explode(',', $hasil);
+       
+$bot1 = $antb[0];   
+$bot2 = $antb[1];     
+$bot3 = $antb[2];    
+
 
 $capv = solveCaptcha();
 
-$url = 'https://coins-battle.com/game/claimreward';
-$data = "game_id=".$idd."&csrf_token=".$csf."&captcha=recaptchav2&g-recaptcha-response=".$capv."";
-$las = batt($url, 'POST', $data);
-
-$suc = explode(', to continue earning',explode('<div class="alert text-center alert-success"><i class="fa fa-check-circle"></i> ', $las)[1])[0];
+$url = 'https://hatecoin.me/faucet/verify';
+$data = "antibotlinks=+".$bot1."+".$bot2."+".$bot3."&csrf_token_name=".$csf."&token=".$tok."&captcha=hcaptcha&g-recaptcha-response=&h-captcha-response=".$capv."";
+$response = curl_request($url, 'POST', $data);
+$suc = explode("to your balance" ,explode("Good job!', '", $response)[1])[0];
 date_default_timezone_set('Asia/Jakarta');
 $timestamp = time();
 $wak = date("[H:i]", $timestamp);
-if (strpos($suc, "obtained") !== false) {echo"[".$dx."] ".$wak."  [".$lef."] $suc \n";}
 
-sleep($tim);
-if($lef=="69/70"){$bb=$bb+1;goto xx;}
-
-
+echo " ".$wak." ".$suc." \n";
+if (strpos($suc, "added") !== false) {sleep(361);}
+if($lef=="1/120"){echo "Complete!!! \n";}
 endwhile;
 
-
-
-
-?>
