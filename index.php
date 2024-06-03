@@ -1,8 +1,25 @@
 <?php
 error_reporting(0);
 echo " HAPPY LOOTING!! \n";
+function clearCookieFile() {
+    $file = 'cookie.txt';
+    if (file_exists($file)) {
+        // Open the file in write mode to truncate it
+        $handle = fopen($file, 'w');
+        if ($handle) {
+            fclose($handle); // Close the file after truncating it
+        } else {
+            echo "Failed to open the cookie file. \n";
+        }
+    } else {
+        echo "Cookie file does not exist.\n";
+    }
+}
 
-$ar= array("63978");
+// Example usage
+
+
+$ar= array("63969","63971","63974","63975");
 
 
 $n=4;
@@ -20,9 +37,6 @@ function getName($n) {
     return $randomString;
 }
 
-$mnk = getName($n);
-$rd = rand(0,999);
-$vvv = "Mozilla/5.0 (Linux; Android 2.3.6) AppleWebKit/533.1 (KHTML, like Gecko) edge X/".$mnk."";
 
 function generateRandomIP() {
     // Generate random values for each octet
@@ -36,9 +50,9 @@ function generateRandomIP() {
 
     return $randomIP;
 }
-$ipp = generateRandomIP();
 
-function ofer($url, $method, $data = null) {
+
+function ofer($url, $method, $data = null, $cookie = null) {
 	global $ipp, $vvv;
     $header = array(
         "Host: excentiv.com",
@@ -53,9 +67,10 @@ function ofer($url, $method, $data = null) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_COOKIE, TRUE);
-    curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
-    curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
+    if ($cookie) {
+        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    }
     if ($method === 'POST') {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -65,15 +80,14 @@ function ofer($url, $method, $data = null) {
     return $result;
 }
 
-function batt($url, $method, $data = null) {
+function batt($url, $method, $data = null, $cookie = null) {
 	global $ipp, $vvv;
     $header = array(
         "Host: coins-battle.com",
-        "upgrade-insecure-requests: 1",
         "content-type: application/x-www-form-urlencoded",
         "X-Requested-With: XMLHttpRequest",
-        "X-Forwarded-For: ".$ipp."",
-        "user-agent: ".$vvv.""
+        "X-Forwarded-For: $ipp",
+        "user-agent: $vvv"
     );
     //$proxy = 'http://jmdzpqpq:imrbe2ogb5md@2.56.119.93:5074';
     $ch = curl_init();
@@ -82,10 +96,11 @@ function batt($url, $method, $data = null) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_COOKIE, TRUE);
-    curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
-    curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);    
+    if ($cookie) {
+        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    }
     if ($method === 'POST') {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -101,7 +116,7 @@ function solveCaptcha(){
 a:
 $sit = "6LdQN2wkAAAAAJcsc6u8xgog6ObX0icCRAowGiW8";
 $login = "http://sctg.xyz/in.php?key=Gjd5MbFADqP0DlrurYrAmdIlQ9owqctV|onlyxevil&method=userrecaptcha&googlekey=".$sit."&json=1&pageurl=https://coins-battle.com/game/claimreward";
-$ua[] = "User-Agent: ".$vvv."";
+$ua[] = "User-Agent: $vvv";
 $ua[] = "Content-Type: application/json";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $login);
@@ -140,11 +155,11 @@ return $captcha;
 }
 
 function token(){
-	global $use;
+	global $cookieFile, $use;
 mk:
 $url = "https://excentiv.com/offerwall/?userid=".$use."&key=kMb1m7Rirq8Hpta06GcU";
 //$url = "https://excentiv.com/offerwall?userid=4b4b6bf41acc&key=5eaQHDSVYcwbdACp6ZB7";
-$of = ofer($url, 'GET');
+$of = ofer($url, 'GET', null, $cookieFile);
 
 sleep(5);
 //if (strpos($of, "Games") === false) {echo" Game Hilang \n";sleep(99999);}
@@ -157,6 +172,12 @@ return $tokk;
 $bb = 0;
 
 xx:
+$mnk = getName($n);
+$rd = rand(0,999);
+$vvv = "Mozilla/5.0 (Linux; Android 2.3.6) AppleWebKit/533.1 (KHTML, like Gecko) edge X/".$mnk."";
+
+$cookieFile = 'cookie'.$mnk.'.txt';
+$ipp = generateRandomIP();
 
 
 //$ar= array("4b4b6bf41acc","2957ded8262f","e5cfd39424ff","27b2485eed06","c98283105579");
@@ -164,12 +185,12 @@ xx:
 $use = $ar[$bb];
 echo "userid = ".$use." \n";
 if($use == ""){echo "Complete!!! \n";unlink('cookie.txt');sleep(99999);}
-unlink('cookie.txt');
+
 
 $rot = token();
 
 $url = "https://coins-battle.com/?token=".$rot."";
-$bat = batt($url, 'GET');
+$bat = batt($url, 'GET', null, $cookieFile);
 
 $ui = rand(1,12);
 
@@ -177,7 +198,8 @@ zz:
 
 while(true):
 $url = "https://coins-battle.com/game/play/".$ui."";
-$btc = batt($url, 'GET');
+$btc = batt($url, 'GET', null, $cookieFile);
+
 $con = explode(' </b>&nbsp;',explode('<b class="gradient-text">Website: ', $btc)[1])[0];
 if($con == ""){$bb=$bb;goto xx;}
 if(isset($con)) {
@@ -194,7 +216,7 @@ $capv = solveCaptcha();
 
 $url = 'https://coins-battle.com/game/claimreward';
 $data = "game_id=".$idd."&csrf_token=".$csf."&captcha=recaptchav2&g-recaptcha-response=".$capv."";
-$las = batt($url, 'POST', $data);
+$las = batt($url, 'POST', $data, $cookieFile);
 
 $suc = explode(', to continue earning',explode('<div class="alert text-center alert-success"><i class="fa fa-check-circle"></i> ', $las)[1])[0];
 date_default_timezone_set('Asia/Jakarta');
