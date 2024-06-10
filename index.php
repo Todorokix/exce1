@@ -153,8 +153,8 @@ $response = http_request($url, 'POST', $data, $headers);
 while(true):
 $url = "https://acryptominer.io/user/faucet";
 $str = http_request($url, 'GET', null, $headers);
-$tim = explode(';',explode('var timeUntilNextClaim = ', $str)[1])[0];
-$mod = str_replace('var timeUntilNextClaim = '.$tim.';', 'var timeUntilNextClaim = 0;', $str);
+//$tim = explode(';',explode('var timeUntilNextClaim = ', $str)[1])[0];
+//$mod = str_replace('var timeUntilNextClaim = '.$tim.';', 'var timeUntilNextClaim = 0;', $str);
 //echo " $mod \n";
 $lef = explode('">',explode('<input type="hidden" name="_token" value="', $str)[1])[0];
 if($lef == ""){echo "csf hilang \n";sleep(99999);}
