@@ -129,11 +129,24 @@ function http_request($url, $method = 'GET', $data = null, $headers = []) {
     return $response;
 }
 
+function generateRandomIP() {
+    $octet1 = rand(1, 255);
+    $octet2 = rand(0, 255);
+    $octet3 = rand(0, 255);
+    $octet4 = rand(1, 255);
+    $randomIP = "$octet1.$octet2.$octet3.$octet4";
+    return $randomIP;
+}
+$ipx = generateRandomIP();
+$ipxx = generateRandomIP();
+
+
 $headers = [
        "Host: acryptominer.io",
         "origin: https://acryptominer.io",
         "content-type: application/x-www-form-urlencoded",
         "Connection: keep-alive",
+        "X-Forwarded-For: $ipx, $ipxx", 
         "user-agent: $vvv"
 ];
 
