@@ -3,16 +3,6 @@ error_reporting(0);
 echo " •HAPPY LOOTING• \n";
 
 
-$n=4;
-function getName($n) {
-    $characters = '0123456789';
-    $randomString = ''; 
-    for ($i = 0; $i < $n; $i++) {
-        $index = rand(0, strlen($characters) - 1);
-        $randomString .= $characters[$index];
-    }
-    return $randomString;
-}
 
 function recpt(){
 	global $vvv;
@@ -135,17 +125,26 @@ function generateRandomIP() {
     return $randomIP;
 }
 
+$n=5;
+function getName($n) {
+    $characters = '0123456789';
+    $randomString = ''; 
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+    return $randomString;
+}
 
 zz:
 unlink('cookie.txt');
 $mnk = getName($n);
 $rd = rand(0,999);
-$vvv = "Mozilla/5.0 (Linux; Android 13; SM-A515U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$mnk."";
+$vvv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$mnk."";
 $ipx = generateRandomIP();
 
 $headers = [
        "Host: acryptominer.io",
-        "origin: https://acryptominer.io",
         "content-type: application/x-www-form-urlencoded",
         "Connection: keep-alive",      
         "X-Forwarded-For: $ipx",
