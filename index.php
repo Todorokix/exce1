@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 echo " •HAPPY LOOTING• \n";
-
+unlink('cookie.txt');
 
 
 function recpt(){
@@ -95,7 +95,7 @@ function http_request($url, $method = 'GET', $data = null, $headers = []) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+    curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     //curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
     curl_setopt($ch, CURLOPT_COOKIEFILE,"cookie.txt");
     curl_setopt($ch, CURLOPT_COOKIEJAR,"cookie.txt");
@@ -137,17 +137,16 @@ function getName($n) {
 }
 
 zz:
-unlink('cookie.txt');
+
 $mnk = getName($n);
 $rd = rand(0,999);
 $vvv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$mnk."";
-$ipx = generateRandomIP();
+//$ipx = generateRandomIP();
 
 $headers = [
        "Host: acryptominer.io",
         "content-type: application/x-www-form-urlencoded",
         "Connection: keep-alive",      
-        "X-Forwarded-For: $ipx",
         "user-agent: $vvv"
 ];
 
