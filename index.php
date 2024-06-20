@@ -8,7 +8,7 @@ function recpt(){
 	global $vvv;
 a:
 $sit = "6Lcd0SYpAAAAAPZk7LMsCwVld1y8gAGhjbbHM5x1";
-$login = "http://api.sctg.xyz/in.php?key=6Xb2iI4CenClVzEWLP0ScKbTJX0jJWDp&method=userrecaptcha&googlekey=".$sit."&json=1&pageurl=https://acryptominer.io/user/login";
+$login = "http://api.sctg.xyz/in.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&method=userrecaptcha&googlekey=".$sit."&json=1&pageurl=https://acryptominer.io/user/login";
 $ua[] = "User-Agent: ".$vvv."";
 $ua[] = "Content-Type: application/json";
 $ch = curl_init();
@@ -24,7 +24,7 @@ $re = json_decode($result);
 $id = $re->request;
 if($id==''){goto a;}
 c:
-$url = "http://api.sctg.xyz/res.php?key=6Xb2iI4CenClVzEWLP0ScKbTJX0jJWDp&action=get&id=".$id."";
+$url = "http://api.sctg.xyz/res.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&action=get&id=".$id."";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -47,7 +47,7 @@ return $captcha;
 function solveCaptcha(){
 	global $site, $vvv;
 ay:
-$login = "http://api.sctg.xyz/in.php?key=6Xb2iI4CenClVzEWLP0ScKbTJX0jJWDp&method=turnstile&sitekey=".$site."&json=1&pageurl=https://acryptominer.io/user/faucet";
+$login = "http://api.sctg.xyz/in.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&method=turnstile&sitekey=".$site."&json=1&pageurl=https://acryptominer.io/user/faucet";
 $ua[] = "User-Agent: ".$vvv."";
 $ua[] = "Content-Type: application/json";
 $ch = curl_init();
@@ -63,7 +63,7 @@ $re = json_decode($result);
 $id = $re->request;
 if($id==''){goto ay;}
 cy:
-$url = "http://api.sctg.xyz/res.php?key=6Xb2iI4CenClVzEWLP0ScKbTJX0jJWDp&action=get&id=".$id."";
+$url = "http://api.sctg.xyz/res.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&action=get&id=".$id."";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -131,7 +131,46 @@ function getName($n) {
     }
     return $randomString;
 }
+function captt(){
+	global $vvv;
+a:
+$sit = "6Lcd0SYpAAAAAPZk7LMsCwVld1y8gAGhjbbHM5x1";
+$login = "http://api.sctg.xyz/in.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&method=userrecaptcha&googlekey=".$sit."&json=1&pageurl=https://acryptominer.io/user/faucet";
+$ua[] = "User-Agent: ".$vvv."";
+$ua[] = "Content-Type: application/json";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $login);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $ua);
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+$result = curl_exec($ch);
 
+$re = json_decode($result);
+$id = $re->request;
+if($id==''){goto a;}
+c:
+$url = "http://api.sctg.xyz/res.php?key=LtPy3TlWHBZFzxJTJDdr3SNC1T4a9H6B&action=get&id=".$id."";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $ua);
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+$res = curl_exec($ch);
+if ($res == 'CAPCHA_NOT_READY') {          
+        sleep(6);
+        goto c;
+    }
+if($res=="ERROR_CAPTCHA_UNSOLVABLE"){sleep(80);goto a;}
+
+$captcha = str_replace("OK|", "", $res);
+curl_close($ch);
+return $captcha;
+}
 zz:
 unlink('cookie.txt');
 $mnk = getName($n);
@@ -167,7 +206,7 @@ while(true):
 $url = "https://acryptominer.io/user/faucet";
 $str = http_request($url, 'GET', null, $headers);
 $site = explode('"',explode('<div class="cf-turnstile" data-sitekey="', $str)[1])[0];
-if($site=="0x4AAAAAAAZWGl4XNAQLb9Uf"){$cap = solveCaptcha();$cok = recpt();}else{echo "csf hilang \n";sleep(60);goto zz;}
+if($site=="0x4AAAAAAAZWGl4XNAQLb9Uf"){$cap = solveCaptcha();$cok = captt();}else{echo "csf hilang \n";sleep(60);goto zz;}
 
 $lef = explode('">',explode('<input type="hidden" name="_token" value="', $str)[1])[0];
 sleep(5);
