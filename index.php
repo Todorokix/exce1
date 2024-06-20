@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 echo " •HAPPY LOOTING• \n";
-unlink('cookie.txt');
+
 
 
 function recpt(){
@@ -111,7 +111,14 @@ function http_request($url, $method = 'GET', $data = null, $headers = []) {
     curl_close($ch);
     return $response;
 }
-
+function generateRandomIP() {    
+    $octet1 = rand(1, 255);
+    $octet2 = rand(0, 255);
+    $octet3 = rand(0, 255);
+    $octet4 = rand(1, 255);
+    $randomIP = "$octet1.$octet2.$octet3.$octet4";
+    return $randomIP;
+}
 
 
 $n=5;
@@ -126,7 +133,7 @@ function getName($n) {
 }
 
 zz:
-
+unlink('cookie.txt');
 $mnk = getName($n);
 $rd = rand(0,999);
 $vvv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$mnk."";
@@ -160,13 +167,13 @@ while(true):
 $url = "https://acryptominer.io/user/faucet";
 $str = http_request($url, 'GET', null, $headers);
 $site = explode('"',explode('<div class="cf-turnstile" data-sitekey="', $str)[1])[0];
-if($site=="0x4AAAAAAAZWGl4XNAQLb9Uf"){$cap = solveCaptcha();}else{echo "csf hilang \n";sleep(60);goto zz;}
+if($site=="0x4AAAAAAAZWGl4XNAQLb9Uf"){$cap = solveCaptcha();$cok = recpt();}else{echo "csf hilang \n";sleep(60);goto zz;}
 
 $lef = explode('">',explode('<input type="hidden" name="_token" value="', $str)[1])[0];
 sleep(5);
 
 $url = 'https://acryptominer.io/user/faucet';
-$data = "_token=".$lef."&cf-turnstile-response=".$cap."";
+$data = "_token=".$lef."&cf-turnstile-response=".$cap."&g-recaptcha-response=".$cok."";
 $response = http_request($url, 'POST', $data, $headers);
 $res = explode('",',explode('message: "', $response)[1])[0];
 
