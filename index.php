@@ -18,7 +18,10 @@ function get($url){
   return curl_exec($ch);
 }
 function http_get($url){
-	global $ddv;
+	
+   $rd = rand(0,999);
+$ddv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$rd."";
+
   $header = array(
      "Host: temera88.000webhostapp.com",
      "content-type: application/x-www-form-urlencoded",
@@ -159,8 +162,6 @@ $ipp = generateRandomIP();
 $mnk = getName($n);
 $rd = rand(0,999);
 $vvv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$mnk."";
-$rd = rand(0,999);
-$ddv = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$rd."";
 
 
 $headers = [
@@ -204,9 +205,6 @@ if($bal == ""){echo " Balance Hilang \n";sleep(60);goto zz;}
 echo " Balance: ".$bal." \n";
 
 while(true):
-$rd = rand(0,999);
-$gent = "Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36 X/".$rd."";
-$ddv = $gent;
 $site = "0x4AAAAAAAZWGl4XNAQLb9Uf";
 $cok = solve();
 $cap = solveCaptcha();
